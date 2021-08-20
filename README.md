@@ -86,7 +86,7 @@ This step will perform map projection transformations on the shapefile for each 
 	python prj_operation.py
 ```
 
-### Second step: Image augmentation
+#### Second step: Image augmentation
 
 This step will generate labeled training images via a sequence of operations including scaling, resize, rotation, blurring, adding noise, and binarization. The generated training dataset is saved in "/Training_data/image_set" folder.
 
@@ -94,7 +94,7 @@ This step will generate labeled training images via a sequence of operations inc
 	python Image_augmentation.py
 ```
 
-## Apply image thresholding on the test maps
+### Apply image thresholding on the test maps
 
 This step will convert the RGB test map images into the binary image using the Triangle Thresholding method. Firstly, we need to ensure the continental-level maps are inside the folder "/Test_data/Continents". Then we can run the Thresholding.py script. Once complete, you can check the generated binary map images in the subfolder "/Binary_maps/Continents".
 
@@ -102,9 +102,9 @@ This step will convert the RGB test map images into the binary image using the T
 	python Thresholding.py
 ```
 
-## Train the CNN models on the augmented data set
+### Train the CNN models on the augmented data set
 
-### Prepare the pre-trained CNN models
+#### Prepare the pre-trained CNN models
 
 Network|Tensorflow
 :---:|:---:
@@ -112,7 +112,7 @@ AlexNet | [model (240 MB)](https://www.cs.toronto.edu/~guerzhoy/tf_alexnet/bvlc_
 Inception-V3 | [model (92 MB)](https://github.com/fchollet/deep-learning-models/releases/download/v0.5/inception_v3_weights_tf_dim_ordering_tf_kernels.h5)
 ResNet-50 | [model (103 MB)](https://github.com/fchollet/deep-learning-models/releases/download/v0.2/resnet50_weights_tf_dim_ordering_tf_kernels.h5)
 
-### Train the CNN model
+#### Train the CNN model
 
 Run the two Python scripts in order:
 
@@ -124,9 +124,9 @@ Run the two Python scripts in order:
 This process retrains the pre-trained CNN model on the generated training images. The weights of the re-trained model are saved into the "Outputs" folder.
 
 
-## Test the trained models on test map images
+### Test the trained models on test map images
 
-### Default model with SoftMax output
+#### Default model with SoftMax output
 
 Run prediction.py (inside each CNN model folder) to classify the test maps in the eight classes (the "Noise" class is not included in this part) using the trained CNN model:
 
@@ -140,7 +140,7 @@ The outputs include:
 (3) The overall classification accuracy on the test data set
 
 
-### Alternative version using OpenMax output
+#### Alternative version using OpenMax output
 
 The default model using SoftMax as the last layer cannot reject noise images effectively. Thus, we also implement an improved version using an OpenMax output ([https://arxiv.org/abs/1511.06233](https://arxiv.org/abs/1511.06233)). OpenMax allows rejection of noise map images presented to the CNN models. Here, we provide the code in the "/OpenMax-ResNet" folder to implement a ResNet50-OpenMax model.
 
@@ -156,7 +156,7 @@ The outputs include:
 (3) "test_scores.npy": the output vectors of fc10 layer (the last fully connected layer of ResNet) when processing the test images
 
  
- Then run the following codes in the "/OpenMax" folder:
+Then run the following codes in the "/OpenMax" folder:
 
 ```bash
      python calc_dist.py
