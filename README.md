@@ -54,16 +54,15 @@ Figure 4. Results of seven different thresholding methods applied to the same ma
 
 "Training_data" folder: This folder contains the shapefiles used for automatically generating the labeled training data. These shapefiles are inside the subfolder "shapefiles". Other subfolders (e.g., "base_image") in this folder are created and reserved for storing the generated training images and are currently empty.
 
-"Test_data" folder: This folder contains the two datasets of map images for test experiments. 
+"Test_data" folder: This folder contains the two datasets of map images for test experiments:
+
 Continental-level maps retrieved from Web Map Services (WMS):
 * 8 classes (Global, Africa, Antarctica, Asia, Europe, North America, Oceania, South America) and one addition "Noise" class
 * 100 map images in each category
-* Inside the subfolder "/Test_data/Continents"
 
 U.S. state maps retrieved from Google Image Search:
 * 50 U.S. states and one addition "Noise" class
 * 50 map images in each category
-* Inside the subfolder "/Test_data/States"
 
 
 "DataAugmentation" folder: This folder contains the Python source code of our proposed workflow for automatically generating the labeled training images.
@@ -76,10 +75,10 @@ U.S. state maps retrieved from Google Image Search:
 
 
 
-## Automatic training dataset construction
+### Automatic training dataset construction
 Below, we present the main steps on constructing a labeled training dataset. More detailed comments are in the source code.
 
-### First step: Map projection
+#### First step: Map projection
 
 This step will perform map projection transformations on the shapefile for each class. The original shapefiles are in WGS84 and are in the subfolder "/Training_data/shapefiles". The projected shapefiles are saved as images in the folder "/Training_data/base_image".
 
